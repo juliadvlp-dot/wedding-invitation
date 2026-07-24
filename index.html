@@ -3222,10 +3222,7 @@ textarea{
     <section class="section rsvp" id="rsvp">
       <h2 class="section-title reveal">Анкета гостя</h2>
       <div class="rsvp-intro reveal"><p>Пожалуйста, ответьте на вопросы, которые для вас подготовили <strong>Андрей и Юлия</strong>.</p></div>
-      <form class="reveal" action="https://formsubmit.co/julia.julia101@yandex.ru" method="POST">
-        <input type="hidden" name="_subject" value="Ответ на свадебное приглашение — Юлия и Андрей">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
+      <form class="reveal" id="rsvpForm" action="https://script.google.com/macros/s/AKfycbyz7dt3QT6ag0lredtzHuZcZ901GcsSebv2HG-5pqUWQVkIuEWlHiWp4d0-eqdQWAU0vQ/exec" method="POST" accept-charset="UTF-8">
         <input class="honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off">
         <label><span>Ваши имя и фамилия *</span><input type="text" name="Имя гостя" required autocomplete="name" placeholder="Например, Анна Иванова"></label>
         <fieldset>
@@ -3316,6 +3313,18 @@ function syncAttendanceFields(){
 
 attendanceInputs.forEach(r => r.addEventListener('change', syncAttendanceFields));
 syncAttendanceFields();
+
+const rsvpForm = document.getElementById('rsvpForm');
+if (rsvpForm) {
+  rsvpForm.addEventListener('submit', () => {
+    const submitButton = rsvpForm.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Отправляем ответ…';
+    }
+  });
+}
+
 </script>
 </body>
 </html>
